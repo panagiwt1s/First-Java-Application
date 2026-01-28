@@ -1,0 +1,65 @@
+import java.util.Random;
+
+public class SpecialMatrix {
+	
+	private int[][] matrix;
+	private int size;
+	
+	public SpecialMatrix(int size) {            //Constructor 
+		this.size=size;
+		this.matrix= new int[size][size];
+	}
+	
+	public void createSpecialMatrix() {        
+		Random rand = new Random();          // Random Number Generator
+		
+		int FirstLine=size;
+		
+		for(int i=0; i<size; i++) {
+			 int ones = rand.nextInt(FirstLine+1);// Every line has less/or equal ones than the previous
+			 
+			 for(int j=0; j<ones; j++) {
+				 matrix[i][j]=1;
+			 }
+			 for(int j=ones; j<size; j++) {
+				 matrix[i][j]=0;
+			 }
+		FirstLine=ones;
+		 }
+	}
+	
+	public int countOnes() {
+		int count=0;
+		
+		for(int i=0; i<size; i++) {          // time to execute O(n) 
+			for(int j=0; j<size; j++ ) {
+				if(matrix[i][j]==1)
+					count++;
+				else break;
+			}		
+		}
+		
+		return count;
+	}
+	
+	public void printMatrix() {
+		for(int i=0; i<size; i++) {
+			for(int j=0; j<size; j++) {
+				System.out.print(matrix[i][j] + " ");
+			}
+			System.out.println();
+		}
+	}
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		
+		SpecialMatrix special= new SpecialMatrix (7);
+		
+		special.createSpecialMatrix();
+		special.printMatrix();
+		
+		System.out.print("Number of ones: " + special.countOnes());
+	}
+
+}
